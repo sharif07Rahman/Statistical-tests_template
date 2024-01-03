@@ -1,3 +1,27 @@
+-Comparison of T-Tests: Understanding the Differences Through Examples-
+T-tests are a family of hypothesis tests that allow us to compare means and determine if differences are statistically significant. The type of t-test you choose depends on the data structure and the hypothesis you're testing. Here's an overview of various t-tests with examples:
+
+-One-Sample T-Test:
+Purpose: To determine if the mean of a single group is different from a known or hypothesized population mean.
+Example: A researcher wants to know if the average height of a sample of 50 basketball players is different from the general population average of 6 feet. The one-sample t-test will compare the sample mean against the population mean.
+-Independent Two-Sample T-Test:
+Purpose: To compare the means of two unrelated groups on the same dependent variable.
+Example: Comparing the average scores of two different classrooms (Group A and Group B) on a standardized test to see if one group's mean score differs significantly from the other.
+-Paired Sample T-Test (Dependent T-Test)
+Purpose: To compare the means of the same group at two different times or under two different conditions.
+Example: Measuring the blood pressure of patients before and after a treatment to determine if the treatment led to significant changes in blood pressure.
+-Welch’s T-Test
+Purpose: An adaptation of the independent t-test used when the two groups have unequal variances and sample sizes.
+Example: Comparing the average processing time of two customer service teams with different training programs, where one team is much larger and has more variance in their times.
+-Other Variants
+-Repeated Measures ANOVA: An extension of the paired sample t-test when comparing more than two time points or conditions.
+-Two-Sample T-Test Assuming Equal Variances: Used when the variances of the two groups are statistically similar, unlike in Welch's.
+-One-Way ANOVA: Used to compare the means across three or more unrelated groups.
+Each of these tests is used in specific scenarios that depend on the distribution of data, whether samples are independent or related, and if the groups have equal variances and sizes.
+
+--------------------------------
+--------------------------------
+
 #A/B testing of mailing campaign to clients of two groups
 """
 A/B Testing for Mailing Campaign Analysis:
@@ -18,55 +42,3 @@ Results:
 The script prints out the signup rates for each mailer type, the Chi-square statistic, p-value, and the critical value. It concludes the results 
 of the hypothesis test based on the calculated statistics and the defined acceptance criteria.
 """
-
-                                                                        
-import pandas as pd
-from scipy.stats import chi2_contingency, chi2
-
-# Import data
-campaign_data = pd.read_excel("grocery_database.xlsx", sheet_name="campaign_data")
-
-# Filter data to exclude 'Control' mailer type
-campaign_data_filtered = campaign_data[campaign_data["mailer_type"] != "Control"]
-
-# Create a contingency table (crosstab) for observed frequencies
-observed_values = pd.crosstab(campaign_data_filtered["mailer_type"], campaign_data_filtered["signup_flag"]).values
-
-# Calculate signup rates for each mailer type
-# Assuming mailer types are in a specific order in the crosstab, e.g., Mailer1 is first, Mailer2 is second
-mailer1_signup_rate = observed_values[0][1] / sum(observed_values[0])  # Signup rate for Mailer1
-mailer2_signup_rate = observed_values[1][1] / sum(observed_values[1])  # Signup rate for Mailer2
-
-# Print the signup rates
-print(mailer1_signup_rate, mailer2_signup_rate)
-
-#HYPOTHESIS AND ACCEPTANCE CRITERIA
-null_hypothesis = "there is no relationship between mailer type and signup rate. They are independent"
-alternative_hypothesis = "there is relationship between mailer type and signup rate. They are not independent"
-acceptance_criteria= 0.05
-
-# Calculate acceptance criteria and Chi square stats
-chi2_statistic,p_value, dof, expected_values= chi2_contingency(observed_values, correction =False) 
-print(chi2_statistic, p_value)
-
-#Critical value
-'''chi2.ppf(1 - acceptance_criteria, dof) calculates the critical value of the chi-square 
-statistic such that the area under the chi-square distribution curve to the right of this value equals
-the significance level (acceptance_criteria).
-'''
-critical_value= chi2.ppf(1- acceptance_criteria, dof)
-print(critical_value)
-
-#print chi2 statistic result
-if chi2_statistic >= critical_value:
-    print(f"Since the Chi-square statistic of {chi2_statistic} is higher than that of the critical value of {critical_value}: We reject the null hypothesis and conclude that {alternative_hypothesis}.")
-else:
-    print(f"Since the Chi-square statistic of {chi2_statistic} is lower than that of the critical value of {critical_value}: We retain the null hypothesis and conclude that {null_hypothesis}.")
-
-#print p-value  result
-if p_value <= acceptance_criteria:
-    print(f"Since the p-value of {p_value} is lower than that of the aceptance_criteria of {acceptance_criteria}: We reject the null hypothesis and conclude that {alternative_hypothesis}.")
-else:
-    print(f"Since the p-value of {p_value} is higher than that of the aceptance_criteria of {acceptance_criteria}: We retain the null hypothesis and conclude that {null_hypothesis}.")
-
-
