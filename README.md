@@ -4,19 +4,26 @@ T-tests are a family of hypothesis tests that allow us to compare means and dete
 -One-Sample T-Test:
 Purpose: To determine if the mean of a single group is different from a known or hypothesized population mean.
 Example: A researcher wants to know if the average height of a sample of 50 basketball players is different from the general population average of 6 feet. The one-sample t-test will compare the sample mean against the population mean.
+
 -Independent Two-Sample T-Test:
 Purpose: To compare the means of two unrelated groups on the same dependent variable.
 Example: Comparing the average scores of two different classrooms (Group A and Group B) on a standardized test to see if one group's mean score differs significantly from the other.
+
 -Paired Sample T-Test (Dependent T-Test)
 Purpose: To compare the means of the same group at two different times or under two different conditions.
 Example: Measuring the blood pressure of patients before and after a treatment to determine if the treatment led to significant changes in blood pressure.
+
 -Welch’s T-Test
 Purpose: An adaptation of the independent t-test used when the two groups have unequal variances and sample sizes.
 Example: Comparing the average processing time of two customer service teams with different training programs, where one team is much larger and has more variance in their times.
+
 -Other Variants
 -Repeated Measures ANOVA: An extension of the paired sample t-test when comparing more than two time points or conditions.
+
 -Two-Sample T-Test Assuming Equal Variances: Used when the variances of the two groups are statistically similar, unlike in Welch's.
+
 -One-Way ANOVA: Used to compare the means across three or more unrelated groups.
+
 Each of these tests is used in specific scenarios that depend on the distribution of data, whether samples are independent or related, and if the groups have equal variances and sizes.
 
 --------------------------------
