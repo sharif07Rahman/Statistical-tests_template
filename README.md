@@ -1,20 +1,20 @@
 #A/B testing of mailing campaign to clients of two groups
 """
-A/B Testing for Mailing Campaign Analysis
+A/B Testing for Mailing Campaign Analysis:
 This repository contains a Python script for conducting A/B testing on a grocery store mailing campaign. The analysis aims to determine if 
 there's a statistically significant difference in signup rates between two different types of mailers sent to clients.
 
-Overview
+Overview:
 The script uses a dataset from a grocery_database.xlsx file, specifically from the campaign_data sheet. It filters out control group data
 to focus on the active mailer types. Using the pandas library for data manipulation and the scipy.stats module for statistical analysis,
 it sets up a contingency table and computes the Chi-square statistic and p-value to test the independence of mailer types and signup rates.
 
-Hypothesis Testing
+Hypothesis Testing:
 The null hypothesis states there is no relationship between the mailer type and the signup rate (i.e., they are independent). The alternative
 hypothesis posits that a relationship exists, indicating the mailer type influences the signup rate. The script calculates the Chi-square statistic
 and compares it against a critical value at a significance level of 0.05 to determine whether to retain or reject the null hypothesis.
 
-Results
+Results:
 The script prints out the signup rates for each mailer type, the Chi-square statistic, p-value, and the critical value. It concludes the results 
 of the hypothesis test based on the calculated statistics and the defined acceptance criteria.
 """
